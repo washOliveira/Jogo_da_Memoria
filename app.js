@@ -76,20 +76,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const optionOneId = cardsChosenId[0]
     const optionTwoId = cardsChosenId[1]
     if (cardsChosen[0] === cardsChosen[1]) {
-      alert('You found a match')
+      alert('Você achou um par')
       cards[optionOneId].setAttribute('src', 'images/white.png')
       cards[optionTwoId].setAttribute('src', 'images/white.png')
       cardsWon.push(cardsChosen)
     } else {
       cards[optionOneId].setAttribute('src', 'images/blank.png')
       cards[optionTwoId].setAttribute('src', 'images/blank.png')
-      alert('Sorry, try again')
+      alert('Tente novamente')
     }
     cardsChosen = []
     cardsChosenId = []
     resultDisplay.textContent = cardsWon.length
     if  (cardsWon.length === cardArray.length/2) {
-      resultDisplay.textContent = ' Congratulations! You found them all!'
+      resultDisplay.textContent = ' Parabéns! Você achou todos os pares!'
     }
   }
 
