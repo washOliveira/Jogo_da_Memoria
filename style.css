@@ -1,11 +1,16 @@
 .grid{
 	display: flex;
 	flex-wrap: wrap;
-	width: 800px;
-	height: 600px;
-	  margin: auto;
+	width: 816px;
+	height: 616px;
+	margin: auto;
 }
 
 img{
 	border-radius: 25px;
+	margin: 2px;
+}
+
+body{
+	background: linear-gradient(to right, #bae8cd, #539df4);
 }
