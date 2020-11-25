@@ -51,15 +51,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	    }
 	  ]
 
-  cardArray.sort(() => 0.5 - Math.random())
+  cardArray.sort(() => 0.5 - Math.random());
 
-  const grid = document.querySelector('.grid')
-  const resultDisplay = document.querySelector('#result')
-  var cardsChosen = []
-  var cardsChosenId = []
-  const cardsWon = []
+  const grid = document.querySelector('.grid');
+  var cardsChosen = [];
+  var cardsChosenId = [];
+  var matches = 0;
 
-  //create your board
   function createBoard() {
     for (let i = 0; i < cardArray.length; i++) {
       var card = document.createElement('img')
@@ -70,38 +68,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  //check for matches
   function checkForMatch() {
     var cards = document.querySelectorAll('img')
     const optionOneId = cardsChosenId[0]
     const optionTwoId = cardsChosenId[1]
     if (cardsChosen[0] === cardsChosen[1]) {
-      alert('Você achou um par')
-      cards[optionOneId].setAttribute('src', 'images/white.png')
-      cards[optionTwoId].setAttribute('src', 'images/white.png')
-      cardsWon.push(cardsChosen)
+      cards[optionOneId].setAttribute('class', 'found')
+      cards[optionTwoId].setAttribute('class', 'found')
+      cards[optionOneId].removeEventListener('click', flipCard)
+      cards[optionTwoId].removeEventListener('click', flipCard)
+      matches++;
     } else {
-      cards[optionOneId].setAttribute('src', 'images/blank.png')
-      cards[optionTwoId].setAttribute('src', 'images/blank.png')
-      alert('Tente novamente')
+      setTimeout(() => {
+        cards[optionOneId].setAttribute('src', 'images/blank.png')
+        cards[optionTwoId].setAttribute('src', 'images/blank.png')
+      }, 500)
     }
+    ganhei();
     cardsChosen = []
     cardsChosenId = []
-    resultDisplay.textContent = cardsWon.length
-    if  (cardsWon.length === cardArray.length/2) {
-      resultDisplay.textContent = ' Parabéns! Você achou todos os pares!'
-    }
   }
 
-  //flip your card
-  function flipCard() {
+	function flipCard() {
     var cardId = this.getAttribute('data-id')
+    if (cardId === cardsChosenId[0]) {
+      return;
+    }
     cardsChosen.push(cardArray[cardId].name)
     cardsChosenId.push(cardId)
     this.setAttribute('src', cardArray[cardId].img)
-    if (cardsChosen.length ===2) {
+    if (cardsChosen.length === 2) {
       setTimeout(checkForMatch, 500)
     }
+  }
+
+function ganhei(){
+  	if(matches >=6){
+  		alert("Parabéns! Você achou todos os pares!")
+  	}
   }
 
   createBoard()

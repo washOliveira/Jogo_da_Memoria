@@ -1,4 +1,7 @@
 .grid{
+	background: #f4ecdf;
+	border-radius: 25px;
+	padding: 15px;
 	display: flex;
 	flex-wrap: wrap;
 	width: 816px;
@@ -12,5 +15,14 @@ img{
 }
 
 body{
-	background: linear-gradient(to right, #bae8cd, #539df4);
+	background-color: #fffaf0;
+}
+
+img:hover{
+	box-shadow: 0 0 10px #aaa;
+}
+
+img.found{
+	box-shadow: 0 0 10px #6B8E23;
+	opacity: 0.5;
 }
